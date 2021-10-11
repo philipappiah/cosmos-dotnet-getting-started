@@ -62,7 +62,12 @@ namespace CosmosGettingStartedTutorial
         public async Task GetStartedDemoAsync()
         {
             // Create a new instance of the Cosmos Client
-            this.cosmosClient = new CosmosClient(EndpointUri, PrimaryKey);
+            
+            // Create a new instance of the Cosmos Client in Gateway mode
+            this.cosmosClient = new CosmosClient(EndpointUri, PrimaryKey, new CosmosClientOptions()
+            {
+             ConnectionMode = ConnectionMode.Gateway
+         });
             await this.CreateDatabaseAsync();
             await this.CreateContainerAsync();
             await this.AddItemsToContainerAsync();
